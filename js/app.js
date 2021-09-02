@@ -1,3 +1,23 @@
+    /*
+    Project Overview
+    1. get the all dom element at first and store it 
+    2. add event listener on button 
+    3. fetch the data with fetchData arrow function
+    4. pass the response data from API on to the showData arrow function
+    5. hendle error for all UI data with arrow function and some validation
+    6. add inner HTML to set the all book card
+    7. append the data and clear input Value and textContent
+    */
+
+    /*
+    Problem I face
+    1. because of using arrow function I need to addEventListener vary
+       bottom of the script for initialization issue;
+    2. all UI information don't have valid data so need to fix this with function
+    3. three function have same functionality but can't avoid code repetation
+    4. checking number with if condition with isNaN() and typeOf  
+     */
+
 /* taking input field and search btn */
 const inputField = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-cta');
@@ -19,7 +39,7 @@ const hasImage = (bookObj)=>{
     1. checking the property with hasOwnProperty Mathod;
     2. take array data from book object;
     3. return the first value of array as img Id; 
-    */
+    */ 
 
     if(bookObj.hasOwnProperty('id_librarything')){    
         const imgArray = bookObj.id_librarything;
@@ -68,20 +88,17 @@ const showData =(data)=>{
     bookResultLength= bookArray.length;
     //hendeling undefiend search name of book
     undefinedLength(bookResultLength);
-    //clear the input field value;
-    inputField.value = '';  
+ 
     //set the total search result
     resultOption.innerText = bookResultLength;
     //clear all text content of preveous search
     bookContainer.textContent = ''; 
 
-    
     bookArray.forEach(bookObj => {
-        // console.log(bookObj)
+
         const {title,first_publish_year} =bookObj;
         const author = hasAuthorName(bookObj);
         const publishData =  hasPublisheDate(first_publish_year);
-        
         const imgSrcCode = hasImage(bookObj)
         const publisherName = hasPublisherName(bookObj);
 
@@ -107,14 +124,18 @@ const showData =(data)=>{
 }
 const fetchData = ()=>{
     const inputValue = inputField.value;
+    //validate for empty input field
     if(inputValue===''){
             alert('input field cannot be empty.type a book name');
             return;
     }
+    //featching data from api
     fetch(`https://openlibrary.org/search.json?q=${inputValue}`)
     .then(res => res.json())
     .then(data => showData(data))
 
+    //clear the input field value;
+    inputField.value = ''; 
 }
 //add event listener to btn
 searchBtn.addEventListener('click',fetchData);
