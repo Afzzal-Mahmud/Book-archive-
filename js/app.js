@@ -1,6 +1,7 @@
 /* taking input field and search btn */
 const inputField = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-cta');
+const bookContainer = document.getElementById('books-container')
 let bookResultLength;
 
 //for undefined data hendle function
@@ -39,6 +40,17 @@ const hasAuthorName = (bookObj)=>{
         return 'Unkonwn Author Name'
     }
 }
+//for undefined publisher name
+const hasPublisherName = (bookObj)=>{
+    if(bookObj.hasOwnProperty('publisher')){    
+        const publisherArray = bookObj.publisher;
+        const publisher = publisherArray[0]
+        return publisher;
+    }else{
+        return 'Publisher Name Not Fount'
+    }
+}
+
 // for undefined publishe year
 const hasPublisheDate = (data)=>{
     const publishData = data
@@ -60,15 +72,30 @@ const showData =(data)=>{
     console.log('this is from 9 line',bookResultLength)
     
     bookArray.forEach(bookObj => {
-        // console.log(bookObj)
+        console.log(bookObj)
         const {title,first_publish_year} =bookObj;
         const author = hasAuthorName(bookObj);
         const publishData =  hasPublisheDate(first_publish_year);
         // console.log(publishData,title);
-
         const imgSrcCode = hasImage(bookObj)
-        console.log(imgSrcCode);
-        
+        const publisherName = hasPublisherName(bookObj);
+        const col = document.createElement('div');
+              col.classList.add('col');
+              col.innerHTML=`
+              <div class="card h-100">
+              <img src="https://covers.openlibrary.org/b/id/${imgSrcCode}-M.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">${title}</h5>
+                    <h6 class="card-title fw-bold pb-3">Author Name : ${author}</h6>
+                    <h6 class="card-title ">Publisher : ${publisherName}</h6>
+                    <h6 class="card-title ">First Publish year : ${publishData}</h6>
+                </div>
+              <div class="card-footer">
+                  <div class="btn w-100 btn-info">Buy Now</div>
+              </div>
+            </div>
+          `
+        bookContainer.appendChild(col);        
     });
     // console.log('all book',bookArray);
 }
