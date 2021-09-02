@@ -2,6 +2,7 @@
 const inputField = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-cta');
 const bookContainer = document.getElementById('books-container')
+const resultOption = document.getElementById('result')
 let bookResultLength;
 
 //for undefined data hendle function
@@ -67,18 +68,23 @@ const showData =(data)=>{
     bookResultLength= bookArray.length;
     //hendeling undefiend search name of book
     undefinedLength(bookResultLength);
-      
-    
-    console.log('this is from 9 line',bookResultLength)
+    //clear the input field value;
+    inputField.value = '';  
+    //set the total search result
+    resultOption.innerText = bookResultLength;
+    //clear all text content of preveous search
+    bookContainer.textContent = ''; 
+
     
     bookArray.forEach(bookObj => {
-        console.log(bookObj)
+        // console.log(bookObj)
         const {title,first_publish_year} =bookObj;
         const author = hasAuthorName(bookObj);
         const publishData =  hasPublisheDate(first_publish_year);
-        // console.log(publishData,title);
+        
         const imgSrcCode = hasImage(bookObj)
         const publisherName = hasPublisherName(bookObj);
+
         const col = document.createElement('div');
               col.classList.add('col');
               col.innerHTML=`
@@ -87,8 +93,8 @@ const showData =(data)=>{
                 <div class="card-body">
                     <h5 class="card-title fw-bold">${title}</h5>
                     <h6 class="card-title fw-bold pb-3">Author Name : ${author}</h6>
-                    <h6 class="card-title ">Publisher : ${publisherName}</h6>
-                    <h6 class="card-title ">First Publish year : ${publishData}</h6>
+                    <h6 class="card-title "><span class="fw-bold">Publisher : </span>${publisherName}</h6>
+                    <h6 class="card-title "><span class="fw-bold">First Publish year :</span> ${publishData}</h6>
                 </div>
               <div class="card-footer">
                   <div class="btn w-100 btn-info">Buy Now</div>
@@ -102,13 +108,14 @@ const showData =(data)=>{
 const fetchData = ()=>{
     const inputValue = inputField.value;
     if(inputValue===''){
-            alert('input field cannot be empty');
+            alert('input field cannot be empty.type a book name');
             return;
     }
     fetch(`https://openlibrary.org/search.json?q=${inputValue}`)
     .then(res => res.json())
     .then(data => showData(data))
-    console.log(inputValue)
+
 }
+//add event listener to btn
 searchBtn.addEventListener('click',fetchData);
 
