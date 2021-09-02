@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Shop API</title>
+    <!-- bootstrapp css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- main css -->
+    <link rel="stylesheet" href="./css/main.css">
+    <script defer src="./js/app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+        <div class="heading-text">
+            <h1 class="text-center text-white fw-bold">Welcome to Book Shoop</h1>
+        </div>
+        <!-- input group for search book -->
+        <div class="input-group mb-3">
+            <input id="search-input" type="text" class="form-control" placeholder="search your book by name" aria-label="search your book by name">
+            <button id="search-cta" class="btn btn-outline-secondary btn-custom" type="button">Search</button>
+        </div>
+        </header>
+        <!-- main section start where books are load dynamically -->
+        <main>
+            <section>
+                <div id="books-container" class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                      <div class="card h-100">
+                        <img src="https://covers.openlibrary.org/b/id/554106-M.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title fw-bold">Book Name</h5>
+                          <h6 class="card-title fw-bold pb-3">Author Name : Angelo Mark</h6>
+                          <h6 class="card-title ">Publisher : Course Technology</h6>
+                          <h6 class="card-title ">First Publish year : 2000</h6>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn w-100 btn-info">Buy Now</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </section>
+        </main>
+    </div>   
+</body>
+</html>

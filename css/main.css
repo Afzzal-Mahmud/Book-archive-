@@ -1,0 +1,18 @@
+/* background for body */
+body{
+    background: rgb(203, 203, 204);
+}
+/* the heading of the book store style */
+.heading-text{
+    padding: 2em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: rgb(47, 47, 47);
+    margin: 1em 0;
+}
+/* custom search btn style */
+.btn-custom{
+    background: #397038;;
+    color: whitesmoke;
+    font-weight: bold;
+}
